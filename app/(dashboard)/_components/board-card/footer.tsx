@@ -1,3 +1,7 @@
+"use client";
+
+import { api } from "@/convex/_generated/api";
+import { useApiMutation } from "@/hooks/use-api-mutation";
 import { cn } from "@/lib/utils";
 import { Star } from "lucide-react";
 
@@ -6,8 +10,8 @@ interface FooterProps {
   authorLabel: string;
   createdAtLabel: string;
   isFavorite: boolean;
-  onClick: () => void;
   disabled: boolean;
+  onClick: () => void;
 }
 
 export const Footer = ({
@@ -15,9 +19,18 @@ export const Footer = ({
   authorLabel,
   createdAtLabel,
   isFavorite,
-  onClick,
   disabled,
+  onClick,
 }: FooterProps) => {
+  const handleClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    onClick();
+  };
+
   return (
     <div className="relative bg-white p-3">
       <p className="text-[13px] truncate max-w-[calc(100%-20px)]">{title}</p>
@@ -29,7 +42,7 @@ export const Footer = ({
           "opacity-0 group-hover:opacity-100 transition absolute top-3 right-3 text-muted-foreground hover:text-blue-600",
           disabled && "cursor-not-allowed opacity-75"
         )}
-        onClick={onClick}
+        onClick={handleClick}
         disabled={disabled}
       >
         <Star
