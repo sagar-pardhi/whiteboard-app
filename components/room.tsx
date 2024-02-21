@@ -1,7 +1,7 @@
 "use client";
 
 import { ClientSideSuspense } from "@liveblocks/react";
-import { RoomProvider } from "@/liveblocks.config";
+import { RoomProvider, useSelf } from "@/liveblocks.config";
 import { ReactNode } from "react";
 
 interface RoomProps {
@@ -11,6 +11,8 @@ interface RoomProps {
 }
 
 export const Room = ({ children, roomId, fallback }: RoomProps) => {
+  const info = useSelf((me) => me.info);
+
   return (
     <RoomProvider id={roomId} initialPresence={{}}>
       <ClientSideSuspense fallback={fallback}>
