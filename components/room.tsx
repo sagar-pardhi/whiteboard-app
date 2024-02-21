@@ -11,8 +11,6 @@ interface RoomProps {
 }
 
 export const Room = ({ children, roomId, fallback }: RoomProps) => {
-  const info = useSelf((me) => me.info);
-
   return (
     <RoomProvider id={roomId} initialPresence={{}}>
       <ClientSideSuspense fallback={fallback}>
