@@ -8,11 +8,15 @@ import { Rectangle } from "./rectangle";
 interface LayerPreviewProps {
   id: string;
   selectionColor?: string;
-  onLayerPointDown: (e: React.PointerEvent, layerId: string) => {};
+  onLayerPointerDown: (e: React.PointerEvent, layerId: string) => void;
 }
 
 export const LayerPreview = memo(
-  ({ id, selectionColor, onLayerPointDown }: LayerPreviewProps) => {
+  ({
+    id,
+    selectionColor,
+    onLayerPointerDown: onLayerPointDown,
+  }: LayerPreviewProps) => {
     const layer = useStorage((root) => root.layers.get(id));
 
     if (!layer) return;
